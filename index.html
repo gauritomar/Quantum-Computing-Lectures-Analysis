@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lecture Information</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+      h2 {
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        text-align: center;
+        font-size: bold;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      th:first-child {
+        width: 30%; /* Adjust the width of the title column */
+      }
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      /* Apply grey background color to alternate rows */
+      tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>QC Midsem Lecture Analysis</h2>
+
+    <table id="lectureTable">
+      <thead>
+        <tr>
+          <th>Lecture</th>
+          <th>Unit</th>
+          <th>Subtopics</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Table content will be added here dynamically -->
+      </tbody>
+    </table>
+
+    <script>
+      // Function to fetch JSON data and populate the table
+      async function fetchJsonData() {
+        try {
+          const response = await fetch("/data");
+          const jsonData = await response.json();
+          const tableBody = document.querySelector("#lectureTable tbody");
+          jsonData.forEach((lecture) => {
+            const row = document.createElement("tr");
+            const titleCell = document.createElement("td");
+            titleCell.textContent = lecture.title;
+            const unitCell = document.createElement("td");
+            unitCell.textContent = lecture.unit;
+            const topicsCell = document.createElement("td");
+            topicsCell.textContent = lecture.subtopics.join(", ");
+            row.appendChild(titleCell);
+            row.appendChild(unitCell);
+            row.appendChild(topicsCell);
+            tableBody.appendChild(row);
+          });
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+
+      // Call the function to fetch and populate data when the page loads
+      fetchJsonData();
+    </script>
+  </body>
+</html>
