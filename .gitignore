@@ -1,3 +1,5 @@
 .env
 Subtitles
 .gitignore
+**.json
+**.txt
