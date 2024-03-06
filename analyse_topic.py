@@ -10,7 +10,7 @@ load_dotenv()
 api_key = os.getenv("OPENAI-API-KEY")
 client = openai.Client(api_key=api_key)
 context = '''
-I am presenting unstructured text data to you. Return this data in a structured json format where the keys should be "unit" containing an integer and "subtopics" containing a list of strings.'''
+I am presenting unstructured text data to you. Return this data in a structured json format where the keys should be "title" containing the title of the lecture, "unit" containing an integer and "subtopics" containing a list of strings.'''
 def get_topics(text):
     try:
         completion= client.chat.completions.create(
