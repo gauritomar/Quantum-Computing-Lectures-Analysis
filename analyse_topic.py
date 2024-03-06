@@ -43,8 +43,6 @@ for lecture in tqdm(summarised_topics):
     
     try:
         json.loads(cleaned_json)
-        if "title" not in cleaned_json.keys():
-            cleaned_json["title"] = title
         cleaned_topics.append(cleaned_json)
     except json.JSONDecodeError:
         # If the JSON is not valid, save it to a text file
